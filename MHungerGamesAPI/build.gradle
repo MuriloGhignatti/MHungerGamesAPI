@@ -9,8 +9,9 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'java-library'
-    id 'maven-publish'
 }
+
+apply plugin: 'maven-publish'
 
 group = 'me.murilo.ghignatti'
 
