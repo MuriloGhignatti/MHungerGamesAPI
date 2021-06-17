@@ -44,3 +44,11 @@ dependencies {
     // Spigot API
     compileOnly 'org.spigotmc:spigot-api:1.17-R0.1-SNAPSHOT'
 }
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
