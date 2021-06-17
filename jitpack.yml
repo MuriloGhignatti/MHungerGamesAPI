@@ -1,3 +1,0 @@
-install:
-  - echo "Custom Install"
-  - ./gradlew publish -PmavPublishToMavenLocal=true
