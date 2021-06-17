@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'MHungerGamesAPI'
-include('lib')
+include('MHungerGamesAPI')
