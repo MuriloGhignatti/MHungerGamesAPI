@@ -79,6 +79,7 @@ public abstract class Kit implements Listener{
         try {
             File kitFolder = new File(new StringBuilder(Bukkit.getPluginManager().getPlugin("MHungerGames").getDataFolder().getAbsolutePath()).append("/").append("kits").append("/").append(this.kitName).toString());
             if(!kitFolder.exists()){
+                kitFolder.mkdirs();
                 ObjectMapper mapper = new ObjectMapper();
                 mapper.enable(SerializationFeature.INDENT_OUTPUT);
                 mapper.writeValue(new File(new StringBuilder(Bukkit.getPluginManager().getPlugin("MHungerGames").getDataFolder().getAbsolutePath()).append("/").append("kits").append("/").append(this.kitName).append("/").append(this.kitName).append(".json").toString()), this);
