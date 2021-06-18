@@ -9,6 +9,7 @@ import java.util.UUID;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -57,10 +58,11 @@ public abstract class Kit implements Listener{
     /**
      * Generate the default config for your kit, this is called by MHungerGames
      */
-    public void generateConfig(Class<? extends Kit> kitClass){
+    public void generateConfig(){
         try {
-            Kit currentKit = kitClass.getDeclaredConstructor().newInstance();
+            Kit currentKit = getClass().getDeclaredConstructor().newInstance();
             ObjectMapper mapper = new ObjectMapper();
+            mapper.enable(SerializationFeature.INDENT_OUTPUT);
             mapper.writeValue(new File(new StringBuilder(Bukkit.getPluginManager().getPlugin("MHungerGames").getDataFolder().getAbsolutePath()).append("/").append("kits").append("/").append(this.kitName).append(".json").toString()), currentKit);
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
                 | NoSuchMethodException | SecurityException e) {
