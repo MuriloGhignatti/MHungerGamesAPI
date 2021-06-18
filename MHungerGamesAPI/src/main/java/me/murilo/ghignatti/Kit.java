@@ -66,7 +66,14 @@ public abstract class Kit implements Listener{
     public abstract void copyFrom(Kit kit);
 
     /**
-     * Generate the default config for your kit, this is called by MHungerGames
+     * This function is called by MHungerGamesAPI to reload your configurations, don't change this unless you know excatcly what you are doing
+     */
+    public void reloadConfig(){
+        this.loadConfig();
+    }
+
+    /**
+     * This function is called by MHungerGamesAPI to load or generate your configurations, don't change this unless you know excatcly what you are doing
      */
     public void loadConfig(){
         try {
@@ -79,10 +86,10 @@ public abstract class Kit implements Listener{
             else{
                 File configFile = new File(new StringBuilder(Bukkit.getPluginManager().getPlugin("MHungerGames").getDataFolder().getAbsolutePath()).append("/").append("kits").append("/").append(this.kitName).append("/").append(this.kitName).append(".json").toString());
                 ObjectMapper mapper = new ObjectMapper();
-                if(!configFile.exists()){
+                if(!configFile.exists())
                     mapper.writeValue(new File(new StringBuilder(Bukkit.getPluginManager().getPlugin("MHungerGames").getDataFolder().getAbsolutePath()).append("/").append("kits").append("/").append(this.kitName).append("/").append(this.kitName).append(".json").toString()), this);
-                }
-                this.copyFrom(mapper.readValue(configFile, getClass()));
+                else
+                    this.copyFrom(mapper.readValue(configFile, getClass()));
 
             }
         } catch (IllegalArgumentException | SecurityException e) {
